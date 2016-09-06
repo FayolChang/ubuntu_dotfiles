@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow extract man colored-man-pages ubuntu z zsh_reload)
+plugins=(docker docker-compose git git-flow extract man colored-man-pages ubuntu z zsh_reload)
 
 # User configuration
 
@@ -61,10 +61,25 @@ export SPARK_HOME=/usr/local/sparkpl
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=$JAVA_HOME/bin:$PATH
-export PATH=$HOME/anaconda2/bin:$PATH
+
+# py35
+if [[ -d $HOME/anaconda2/envs/py35/bin ]]; then
+    export PATH=$HOME/anaconda2/envs/py35/bin:$PATH
+fi
+
+if [[ -d  $HOME/anaconda2/bin ]]; then
+    export PATH=$HOME/anaconda2/bin:$PATH
+fi
+
+
 export PATH=$SCALA_HOME/bin:$PATH
 export PATH=$SPARK_HOME/sbin:$PATH
 export PATH=/usr/local/texlive/2015/bin/x86_64-linux:$PATH
+
+if [ -d $HOME/.local ]; then
+    export PATH=$HOME/.local/bin:$PATH
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -93,3 +108,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias sed="sed -r"
+alias nb='jupyter notebook'
+alias nbh='jupyter notebook --notebook-dir=.'
+eval "$(thefuck --alias)"
+alias copy='xclip -sel clip'
